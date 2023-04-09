@@ -23,7 +23,11 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - ./delivery:/var/www/html
+      - ./delivery/app:/var/www/html/app
+      - ./delivery/config:/var/www/html/config
+      - ./delivery/database:/var/www/html/database
+      - ./delivery/routes:/var/www/html/routes
+      - ./delivery/tests:/var/www/html/tests
     depends_on:
       - db
   nginx:
@@ -40,7 +44,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./front:/app
+      - ./front/src:/app/src
     depends_on:
       - laravel
     environment:

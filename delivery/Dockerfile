@@ -28,7 +28,7 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 WORKDIR /var/www/html
 
 # Устанавливаем зависимости Composer и генерируем ключ для приложения
-RUN composer install --no-interaction --prefer-dist --no-dev && php artisan key:generate
+RUN composer install --no-interaction --prefer-dist --no-dev && php artisan key:generate && php artisan passport:keys
 
 # Экспонируем порт 9000
 EXPOSE 9000

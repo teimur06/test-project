@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Button} from 'react-bootstrap';
-import { useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import DeliveryStatusSelect from './DeliveryStatusSelect';
 import OrderForm from './OrderForm';
-
+import {clearAdmin, clearToken} from "../redux/actions";
 
 const Main = () => {
     const twiceEffect1 = useRef(false);
@@ -14,6 +14,8 @@ const Main = () => {
 
     const [deliveryRequest, setDeliveryRequest] = useState([]);
     const [cities, setCities] = useState([]);
+    const dispatch = useDispatch();
+
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -28,6 +30,10 @@ const Main = () => {
         if (twiceEffect1.current === false) {
             async function fetchData() {
                 const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/cities`, requestOptions);
+                if (response.status !== 200) {
+                    dispatch(clearAdmin());
+                    dispatch(clearToken());
+                }
                 const data = await response.json();
                 console.log(data);
                 setCities(data.cities);
@@ -44,7 +50,10 @@ const Main = () => {
         if (twiceEffect2.current === false) {
             async function fetchData() {
                 const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/delivery`, requestOptions);
-
+                if (response.status !== 200) {
+                    dispatch(clearAdmin());
+                    dispatch(clearToken());
+                }
                 const data = await response.json();
                 console.log(data);
                 setDeliveryRequest(data);

@@ -7,6 +7,10 @@ WORKDIR /app
 # Копируем package.json и package-lock.json для установки зависимостей
 COPY package*.json ./
 
+COPY . .
+
+
+
 # Устанавливаем зависимости
 RUN npm install
 
@@ -15,4 +19,5 @@ RUN npm install
 EXPOSE 3000
 
 # Запускаем приложение
-CMD ["npm", "start", "--", "--watch"]
+CMD ["npm", "start"]
+
