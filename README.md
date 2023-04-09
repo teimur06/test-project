@@ -27,5 +27,6 @@
 1. Проект должен быть запущен
 2. Открыть командную строку
 3. Перейдите в каталог delivery
-4. Выполните `composer install && php artisan passport:keys`
+4.1 Если у вас Linux выполните `composer install && php artisan passport:keys`
+4.2 Если у вас Windows выполните `composer install ; php artisan passport:keys`
 5. Для выполнения самих тестов введите `php artisan test --env=testing`
